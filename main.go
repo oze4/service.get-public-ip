@@ -37,7 +37,7 @@ func main() {
 	}
 	defer tx.Rollback(context.Background())
 
-	_, err = tx.Exec(context.Background(), "update " + pgtbl + " set lastknownpublicipaddress = $1 where lastknownpublicipaddress is not null", inet.PublicIP)
+	_, err = tx.Exec(context.Background(), "update " + pgtbl + " set public = $1 where id = $2", inet.PublicIP, 1)
 	if err != nil {
 		panic(err.Error())
 	}
